@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Database2022.Views.ProductsPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout.Padding>
+                <OnPlatform 
+                    x:TypeArguments="Thickness"
+                    Android="20"
+                    iOS="50"/>
+            </StackLayout.Padding>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Add"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" 
+                    Command="{Binding NewProductCommand}"                             
+                         />
+                <Button Text="List"                  
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" 
+                    Command="{Binding LoadProductsCommand}"                             
+                         />
+            </StackLayout>
+            <ListView
+                x:Name="celda"
+                ItemsSource="{Binding Products}"
+                HasUnevenRows="True"            
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                CornerRadius="20"
+                                HasShadow="True"
+                                Margin="3">
+
+                                <StackLayout
+                                    Orientation="Vertical">
+                                    <Grid
+                                    x:Name="Item"
+                                    VerticalOptions="CenterAndExpand">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label 
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Text="ID: "
+                                            FontAttributes="Bold"/>
+
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding ProductId}"/>
+
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Text="Apellidos: "
+                                            FontAttributes="Bold"/>
+
+                                        <Label 
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="{Binding Name}"/>
+
+                                        <Label
+                                            Grid.Row="2"
+                                            Grid.Column="0"
+                                            Text="Nombres: "
+                                            FontAttributes="Bold"/>
+
+                                        <Label 
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Text="{Binding Brand}"/>
+
+                                        <Label
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            Text="DirecciÃ³n: "
+                                            FontAttributes="Bold"/>
+
+                                        <Label
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Text="{Binding Stock}"/>
+
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.Column="0"
+                                            Text="Edad: "
+                                            FontAttributes="Bold"/>
+
+                                        <Label
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            Text="{Binding Price}"/>
+                                        <Button
+                                            Grid.Row="5"
+                                            Grid.Column="0"
+                                            Text="Actualizar"                  
+                                            
+                                            
+                                            BindingContext="{Binding Source={x:Reference celda}, Path=BindingContext}" 
+                                            Command="{Binding UpdateProductCommand}"  
+                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                 />
+                                        <Button
+                                            Grid.Row="5"
+                                            Grid.Column="1"
+                                            Text="Eliminar"                  
+                                            
+                                            
+                                            BindingContext="{Binding Source={x:Reference celda}, Path=BindingContext}" 
+                                            Command="{Binding DeleteProductCommand}"  
+                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                 />
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
